@@ -1,0 +1,60 @@
+Connected.
+SQL> create table orders( orderid number primary key,orderdate date,product_id number,amount number(10,2));
+
+Table created.
+
+SQL> insert into orders values(1,'2-09-2024',101,2500);
+insert into orders values(1,'2-09-2024',101,2500)
+                            *
+ERROR at line 1:
+ORA-01843: not a valid month
+
+
+SQL> insert into orders values(1,'2-mar-2024',101,2500);
+
+1 row created.
+
+SQL> insert into orders values(2,'3-mar-2024',102,2800);
+
+1 row created.
+
+SQL> insert into orders values(3,'4-mar-2024',103,800);
+
+1 row created.
+
+SQL> insert into orders values(4,'5-mar-2024',104,8000);
+
+1 row created.
+
+SQL> insert into orders values(5,'6-mar-2024',105,7000);
+
+1 row created.
+
+SQL> insert into orders values(6,'6-mar-2024',106,6000);
+
+1 row created.
+
+SQL> insert into orders values(7,'6-jul-2024',107,3000);
+
+1 row created.
+
+SQL> insert into orders values(8,'9-jul-2024',108,6000);
+
+1 row created.
+
+SQL> insert into orders values(9,'10-jul-2024',109,7000);
+
+1 row created.
+
+SQL> insert into orders values(10,'11-jul-2024',110,7500);
+
+1 row created.
+
+SQL> select extract(year from orderdate) as year,extract(month from orderdate)as month,sum(amount) as total_revenue,count(distinct orderid) as total_orders from orders group by extract(year from orderdate),extract(month from orderdate) order by year,month;
+
+      YEAR      MONTH TOTAL_REVENUE TOTAL_ORDERS
+---------- ---------- ------------- ------------
+      2024          3         27100            6
+      2024          7         23500            4
+
+SQL>                                  
